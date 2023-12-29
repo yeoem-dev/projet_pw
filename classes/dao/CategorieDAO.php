@@ -11,19 +11,11 @@ class CategorieDAO {
     public function create(CategorieModel $categorie) {
         global $pdo;
         try {
-            $sql = "INSERT INTO categorie (nomCategorie, codeCategorie) VALUES (:nomCategorie, :codeCategorie)";
-            $nomCategorie = $categorie->getNomCategorie();
-            $codeCategorie = $categorie->getCodeCategorie();
-
-            // Requête préparée
-            $stmt = $pdo->prepare($sql);
-
-            $stmt->bindParam(':nomCategorie', $nomCategorie);
-            $stmt->bindParam(':codeCategorie', $codeCategorie);
-
-            $stmt->execute();
+            $stmt = $pdo->prepare("INSERT INTO categorie (nomCategorie, codeCategorie) VALUES (?, ?)");
+            $stmt->execute([$categorie->getNomCategorie(), $categorie->getCodeCategorie()]);
             return true;
         } catch (PDOException $e) {
+            // Gérer les erreurs d'insertion ici
             return false;
         }
 
@@ -32,54 +24,63 @@ class CategorieDAO {
     // Méthode pour récupérer une catégorie par son ID
     public function getById($id) {
         global $pdo;
-        $sql = "SELECT * FROM categorie WHERE id = :id";
-
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':id', $id);
-        $stmt->execute(); //On execute notre requête
-        $result = $stmt->fetch(PDO::FETCH_ASSOC); //Le rend dans une ligne
-        return $result ? $result : false; //Si vide, on rend faux
+            try {
+                $stmt = $pdo->prepare("SELECT * FROM categorie WHERE idCategorie = ?");
+                $stmt->execute([$id]);
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+                if ($row) {
+                    return new CategorieModel($row['idCategorie'], $row['nomCategorie'], $row['codeCategorie']);
+                } else {
+                    return null; // Aucun contact trouvé avec cet ID
+                }
+            } catch (PDOException $e) {
+                // Gérer les erreurs de récupération ici
+                return null;
+            
+            }
     }
 
-    // Méthode pour récupérer la liste de tous les contacts
-    public static function getAll() {
+    // Méthode pour récupérer la liste de tous les categories
+    public function getAll() {
         global $pdo;
-        $sql = "SELECT * FROM categorie";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC); //Le rend dans un tableau
-    }
+        try {
+            $stmt = $pdo->query("SELECT * FROM categorie");
+            $categories = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $categories[] = new CategorieModel($row['idCategorie'], $row['nomCategorie'], $row['codeCategorie']);
+            }
+
+            return $categories;
+        } catch (PDOException $e) {
+            
+            return [];
+        }
+    }  
 
     // Méthode pour mettre à jour une categorie
     public function update(CategorieModel $categorie) {
-        //On importe notre variable global de connexion.
-
         global $pdo;
-        $sql = "UPDATE categorie SET nomCategorie = :nomCategorie, codeCategorie = :codeCategorie WHERE id = :id";
-
-        $nomCategorie= $categorie->getNomCategorie();
-        $codeCategorie = $categorie->getCodeCategorie();
-
-        $stmt = $pdo->prepare($sql); //On prépare notre requête.
-
-        //On remplace mes VALUES par nos paramètres.
-
-        $stmt->bindParam(':nomCategorie', $nomCategorie);
-        $stmt->bindParam(':codeCategorie', $codeCategorie);
-
-        $stmt->execute(); //On execute notre requête
+        try {
+            $stmt = $pdo->prepare("UPDATE categorie SET nomCategorie = ?, codeCategorie = ? WHERE idCategorie = ?");
+            $stmt->execute([$categorie->getNomCategorie(), $categorie->getCodeCategorie(), $categorie->getIdCategorie()]);
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
-    // Méthode pour supprimer une categorie par son ID
+    // Méthode pour supprimer un categorie par son ID
     public function deleteById($id) {
-        //On importe notre variable global de connexion.
         global $pdo;
-        $sql = "DELETE FROM categorie WHERE id = :id"; //On enregistre dans une variable notre requête SQL
-
-        $stmt = $pdo->prepare($sql);
-
-        $stmt->bindParam(':id', $id);
-
-        $stmt->execute();
+        try {
+            $stmt = $pdo->prepare("DELETE FROM categorie WHERE idCategorie = ?");
+            $stmt->execute([$id]);
+            return true;
+        } catch (PDOException $e) {
+            // Gérer les erreurs de suppression ici
+            return false;
+        }
     }
 }

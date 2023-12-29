@@ -8,10 +8,10 @@ class HomeCategorieController {
     }
 
     public function index() {
-        //$categories = $this->categorieDAO->getAll();
-        $categories = CategorieDAO::getAll();
-        require_once("../../views/categorie/home.php");
-        var_dump($categories);
+        $categories = $this->categorieDAO->getAll();
+
+        include("../../views/categorie/home.php");
+        
     }
 }
 

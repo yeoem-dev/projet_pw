@@ -1,9 +1,9 @@
 <?php
 
 class CategorieModel {
-    public $idCategorie;
-    public $nomCategorie;
-    public $codeCategorie;
+    private $idCategorie;
+    private $nomCategorie;
+    private $codeCategorie;
 
     /**
      * @param $idCategorie

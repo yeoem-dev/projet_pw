@@ -2,7 +2,7 @@
 
 // Informations de connexion à la base de données
 $host = "localhost";
-$database = "project";
+$database = "clubsport";
 $username = "root";
 $password = "";
 // Connexion à la base de données en utilisant PDO

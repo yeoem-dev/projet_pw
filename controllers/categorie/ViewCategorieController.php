@@ -24,5 +24,3 @@ $controller=new ViewCategorieController($categorieDAO);
 $controller->viewCategorie($_GET['id']);
 
 
-?>
-

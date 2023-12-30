@@ -52,5 +52,5 @@ global $pdo;
 $categorieDAO = new CategorieDAO($pdo);
 $controller = new EditCategorieController($categorieDAO);
 $controller->editCategorie($_GET['id']);
-?>
+
 

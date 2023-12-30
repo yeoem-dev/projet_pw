@@ -10,7 +10,7 @@
         <ul>
             <li><a href=".">Accueil</a></li>
             <li><a href="controllers/categorie/HomeCategorieController.php">Catégories</a></li>
-            <li><a href="#">Licenciés</a></li>
+            <li><a href="controllers/licencie/HomeLicencieController.php">Licenciés</a></li>
             <li><a href="#">Educateurs</a></li>
             <li><a href="#">Contacts</li>
         </ul>

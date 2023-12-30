@@ -17,8 +17,7 @@ class LicencieModel {
      * @param $categorieId
 
      */
-    public function __construct($idLicencie, $numLicence, $nomLicencie, $prenomLicencie, $categorieId)
-    {
+    public function __construct($idLicencie, $numLicence, $nomLicencie, $prenomLicencie, $categorieId) {
         $this->idLicencie = $idLicencie;
         $this->numLicence = $numLicence;
         $this->nomLicencie = $nomLicencie;
@@ -30,100 +29,81 @@ class LicencieModel {
     /**
      * @return mixed
      */
-    public function getIdLicencie()
-    {
+    public function getIdLicencie() {
         return $this->idLicencie;
     }
 
     /**
      * @param mixed $idLicencie
      */
-    public function setIdLicencie($idLicencie)
-    {
+    public function setIdLicencie($idLicencie) {
         $this->idLicencie = $idLicencie;
     }
 
     /**
      * @return mixed
      */
-    public function getNumLicence()
-    {
+    public function getNumLicencie() {
         return $this->numLicence;
-    }
-
-    /**
-     * @param mixed $numLicence
-     */
-    public function setNumLicence($numLicence)
-    {
-        $this->numLicence = $numLicence;
     }
 
     /**
      * @return mixed
      */
-    public function getNomLicencie()
-    {
+    public function getNomLicencie() {
         return $this->nomLicencie;
     }
 
     /**
      * @param mixed $nomLicencie
      */
-    public function setNomLicencie($nomLicencie)
-    {
+    public function setNomLicencie($nomLicencie) {
         $this->nomLicencie = $nomLicencie;
     }
 
     /**
      * @return mixed
      */
-    public function getPrenomLicencie()
-    {
+    public function getPrenomLicencie() {
         return $this->prenomLicencie;
     }
 
     /**
      * @param mixed $prenomLicencie
      */
-    public function setPrenomLicencie($prenomLicencie)
-    {
+    public function setPrenomLicencie($prenomLicencie) {
         $this->prenomLicencie = $prenomLicencie;
     }
 
     /**
      * @return mixed
      */
-    public function getCategorieId()
-    {
+    public function getCategorieId() {
         return $this->categorieId;
     }
 
     /**
      * @param mixed $categorieId
      */
-    public function setCategorieId($categorieId)
-    {
+    public function setCategorieId($categorieId) {
         $this->categorieId = $categorieId;
     }
 
     /**
      * @return bool
      */
-    public function isActive()
-    {
+    public function isActive() {
         return $this->isActive;
     }
 
     /**
      * @param bool $isActive
      */
-    public function setIsActive($isActive)
-    {
+    public function setIsActive($isActive) {
         $this->isActive = $isActive;
     }
 
-
-
-
+    public static function generateNumLicence() {
+        
+    }
 }

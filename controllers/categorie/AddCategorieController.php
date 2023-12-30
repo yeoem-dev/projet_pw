@@ -16,7 +16,7 @@ class AddCategorieController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Récupérer les données du formulaire
             $nomCategorie = $_POST['nomCategorie'];
-            $codeCategorie= $_POST['codeCategorie'];
+            $codeCategorie = $_POST['codeCategorie'];
             // Valider les données du formulaire
 
             // Créer un nouvel objet CategorieModel avec les données du formulaire
@@ -27,8 +27,8 @@ class AddCategorieController {
                 header('Location:HomeCategorieController.php');
                 exit();
             } else {
-                // Gérer les erreurs d,ajout de contact
-                echo "Erreur lors de l'ajout du contact";
+                // Gérer les erreurs d'ajout de categorie
+                echo "Erreur lors de l'ajout du categorie";
             }
 
         }
@@ -38,7 +38,6 @@ class AddCategorieController {
 }
 
 require_once("../../config/config.php");
-
 require_once("../../classes/models/CategorieModel.php");
 require_once("../../classes/dao/CategorieDAO.php");
 global $pdo;

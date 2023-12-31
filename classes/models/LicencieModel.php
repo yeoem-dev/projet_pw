@@ -43,7 +43,7 @@ class LicencieModel {
     /**
      * @return mixed
      */
-    public function getNumLicencie() {
+    public function getNumLicence() {
         return $this->numLicence;
     }
 

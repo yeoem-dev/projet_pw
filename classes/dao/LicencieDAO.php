@@ -44,9 +44,17 @@ class LicencieDAO {
 
             $licencies = [];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $licencies[] = new LicencieModel($row['idLicencie'], $row['numLicence'], $row['nomLicencie'], $row['prenomLicencie'], $row['categorieId']);
+                $categorieDAO = new CategorieDAO($pdo);
+                $categorie = $categorieDAO->getById($row['categorieId']);
+                $licencies[] = new LicencieModel(
+                    $row['idLicencie'], 
+                    $row['numLicence'], 
+                    $row['nomLicencie'], 
+                    $row['prenomLicencie'], 
+                    $categorie
+                );
             }
-
+            
             return $licencies;
         } catch (PDOException $e) {
             return [];
@@ -78,3 +86,6 @@ class LicencieDAO {
         }
     }
 }
+
+require_once("CategorieDAO.php");
+require_once('../../classes/models/CategorieModel.php');

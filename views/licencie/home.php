@@ -24,10 +24,11 @@
         <tbody>
         <?php foreach ($licencies as $licencie): ?>
             <tr>
-                <td><?php echo $licencie->getNumLicencie(); ?></td>
+                <td><?php echo $licencie->getNumLicence(); ?></td>
                 <td><?php echo $licencie->getNomLicencie(); ?></td>
                 <td><?php echo $licencie->getPrenomLicencie(); ?></td>
-                <td><?php echo 0 ?></td>
+                <td><?php echo $licencie->getCategorieId()->getCodeCategorie(); ?></td>
+                
                 <td>
                     <a href="ViewLicencieController.php?id=<?php echo $licencie->getIdLicencie(); ?>">Voir</a>
                     <a href="EditLicencieController.php?id=<?php echo $licencie->getIdLicencie(); ?>">Modifier</a>

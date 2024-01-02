@@ -19,7 +19,7 @@ class ContactModel
      * @param $numTelContact
      * @param $licencieId
      */
-    public function __construct($idContact, $nomContact, $prenomContact, $emailContact, $numTelContact, $licencieId) {
+    public function __construct($idContact, $nomContact, $prenomContact, $emailContact, $numTelContact, int $licencieId) {
         $this->idContact = $idContact;
         $this->nomContact = $nomContact;
         $this->prenomContact = $prenomContact;

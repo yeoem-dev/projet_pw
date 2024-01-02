@@ -1,6 +1,6 @@
 <?php
 class EditCategorieController {
-    private $categorieDAO;
+    private CategorieDAO $categorieDAO;
 
     public function __construct(CategorieDAO $categorieDAO) {
         $this->categorieDAO = $categorieDAO;

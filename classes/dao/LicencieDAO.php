@@ -22,7 +22,44 @@ class LicencieDAO {
     public function getById($id) {
         global $pdo;
         try {
-            $stmt = $pdo->prepare("SELECT l.*, codeCategorie FROM licencie l JOIN categorie c ON l.categorieId = c.idCcategorie  WHERE idLicencie = ?");
+            $stmt = $pdo->prepare("SELECT l.*, codeCategorie FROM licencie l JOIN categorie c ON l.categorieId = c.idCategorie  WHERE idLicencie = ?");
+            $stmt->execute([$id]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($row) {
+                $categorieDAO = new CategorieDAO($pdo);
+                $categorie = $categorieDAO->getById($row['categorieId']);
+                return new LicencieModel($row['idLicencie'], $row['numLicence'], $row['nomLicencie'], $row['prenomLicencie'], $categorie);
+            } else {
+                return null;
+            }
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+
+    // Méthode pour retrouver un licencié par son numéro de licence
+    public function getByLicenseId($LicenseId) {
+        global $pdo;
+        try {
+            $stmt = $pdo->prepare("SELECT * FROM licencie WHERE NumLicence = ?");
+            $stmt->execute([$LicenseId]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($row) {
+                return new LicencieModel($row['idLicencie'], $row['numLicence'], $row['nomLicencie'], $row['prenomLicencie'], $row['categorieId']);
+            } else {
+                return null;
+            }
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+
+    public function getContactById($id) {
+        global $pdo;
+        try {
+            $stmt = $pdo->prepare("SELECT nomContact, prenomContact FROM licencie l JOIN contact c WHERE l.idLicencie = c.licencieId AND l.idLicencie = ?");
             $stmt->execute([$id]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -65,8 +102,8 @@ class LicencieDAO {
     public function update(LicencieModel $licencie) {
         global $pdo;
         try {
-            $stmt = $pdo->prepare("UPDATE licencie SET nomLicencie = ?, prenomLicencie = ?");
-            $stmt->execute([$licencie->getNomLicencie(), $licencie->getNomLicencie()]);
+            $stmt = $pdo->prepare("UPDATE licencie SET nomLicencie = ?, prenomLicencie = ?, categorieId = ?");
+            $stmt->execute([$licencie->getNomLicencie(), $licencie->getPrenomLicencie(), $licencie->getCategorieId()]);
             return true;
         } catch (PDOException $e) {
             return false;

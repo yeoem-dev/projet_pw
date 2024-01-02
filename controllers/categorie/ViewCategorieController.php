@@ -19,8 +19,8 @@ require_once("../../config/config.php");
 require_once("../../classes/models/CategorieModel.php");
 require_once("../../classes/dao/CategorieDAO.php");
 global $pdo;
-$categorieDAO=new CategorieDAO($pdo);
-$controller=new ViewCategorieController($categorieDAO);
+$categorieDAO = new CategorieDAO($pdo);
+$controller = new ViewCategorieController($categorieDAO);
 $controller->viewCategorie($_GET['id']);
 
 

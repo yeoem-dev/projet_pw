@@ -1,5 +1,5 @@
 <?php 
-
+global $pdo;
 class AddLicencieController {
     
     private LicencieDAO $licenceDAO;
@@ -30,7 +30,11 @@ class AddLicencieController {
             $nouveauLicencie = new LicencieModel(0, $numLicencie, $nomLicencie, $prenomLicencie, $categorieId);
 
             if ($this->licenceDAO->create($nouveauLicencie)) {
-                header('Location: HomeLicencieController.php');
+                // Ajoute son contact
+                global $pdo;
+                $licenceDAO = new LicencieDAO($pdo);
+                $id = $licenceDAO->getByLicenseId($numLicencie)->getIdLicencie();
+                header("Location:../contact/AddContactController.php?id=$id");
                 exit();
             } else {
                 echo "Erreur lors de l'ajout du licencié";
@@ -46,7 +50,7 @@ require_once("../../classes/models/CategorieModel.php");
 
 require_once("../../classes/dao/LicencieDAO.php");
 require_once("../../classes/dao/CategorieDAO.php");
-global $pdo;
+
 $licencieDAO = new LicencieDAO($pdo);
 $categorieDAO = new CategorieDAO($pdo);
 $controller = new AddLicencieController($licencieDAO, $categorieDAO);

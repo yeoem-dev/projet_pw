@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>Liste des catégories</h1>
-<a href="../../controllers/categorie/AddCategorieController.php">Ajouter une catégorie</a>
+<a href="AddCategorieController.php">Ajouter une catégorie</a>
 
 <?php if (count($categories) > 0): ?>
     <table>

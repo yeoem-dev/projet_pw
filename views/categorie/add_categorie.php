@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Ajouter une categorie </h1>
-    <a href="../../views/categorie/home.php">Retour a la liste des categories</a>
+    <a href="HomeCategorieController.php">Retour à la liste des catégories</a>
 
     <form action="../../controllers/categorie/AddCategorieController.php" method="post">
         <label for="nomCategorie">Nom de la categorie:</label>

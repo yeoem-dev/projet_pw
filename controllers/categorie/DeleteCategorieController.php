@@ -1,7 +1,7 @@
 <?php
 
 class DeleteCategorieController {
-    private $categorieDAO;
+    private CategorieDAO $categorieDAO;
 
     public function __construct(CategorieDAO $categorieDAO) {
         $this->categorieDAO = $categorieDAO;
@@ -20,7 +20,7 @@ class DeleteCategorieController {
                 header('Location:HomeCategorieController.php');
                 exit();
             } else {
-                echo " Erreur lors de la suppression de la categorie.";
+                echo "Erreur lors de la suppression de la categorie.";
             }
         }
         include('../../views/categorie/delete_categorie.php');

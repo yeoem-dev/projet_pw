@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Ajouter un licencié </h1>
-    <a href="../../views/licencie/home.php">Retour à la liste des licenciés</a>
+    <a href="HomeLicencieController.php">Retour à la liste des licenciés</a>
 
     <form action="../../controllers/licencie/AddLicencieController.php" method="post">
         <label for="nomLicencie">Nom:</label>
@@ -24,7 +24,6 @@
                     <?= $categorie->getNomCategorie(); ?>
                 </option>
             <?php endforeach; ?>     
-        
         </select><br>
 
         <label for="numLicence">Numéro de licence :</label>

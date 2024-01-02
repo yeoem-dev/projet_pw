@@ -75,8 +75,11 @@ class CategorieDAO {
     public function deleteById($id) {
         global $pdo;
         try {
-            $stmt = $pdo->prepare("DELETE FROM categorie WHERE idCategorie = ?");
+            $stmt = $pdo->prepare("DELETE FROM licencie WHERE categorieId = ?");
             $stmt->execute([$id]);
+
+        
+
             return true;
         } catch (PDOException $e) {
             // Gérer les erreurs de suppression ici

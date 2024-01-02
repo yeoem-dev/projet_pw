@@ -17,28 +17,61 @@ class AddContactController {
             $prenomContact = $_POST['prenomContact'];
             $emailContact = $_POST['emailContact'];
             $numTelContact = $_POST['numTelContact'];
-            $licencieId = intval($_POST['licencieId']);
-            var_dump($licencieId);
 
-            // Valider les données du formulaire
-            
-            $nouveauContact = new ContactModel(0, $nomContact, $prenomContact, $emailContact, $numTelContact, $licencieId);
-            // echo ($nouveauContact);
-            if ($this->contactDAO->create($nouveauContact)) {
-                header('Location: ../licencie/HomeLicencieController.php');
-                exit();
-            } else {
-                echo "Erreur lors de l'ajout du contact";
+            // Si l'ajout du contact se fait via le numéro de licence
+            if (isset($_POST['numLicence'])) {
+                $numLicence = $_POST['numLicence'];
+
+                // Récupérer l'idLicencie correspondant au numéro de licence
+                global $pdo;
+                $licencie = new LicencieDAO($pdo);
+                $licencieId = $licencie->getByNumLicence($numLicence);
+                
+                if (is_null($licencieId)) {
+                    
+                    header('Location: ../../views/contact/erreur_ajout.php');
+                    
+                    exit();
+                } else {
+                    $licencieId = $licencieId->getIdLicencie();
+                }
+                
+            // Si l'ajout du contact se fait par le biais du licencie via $GET['id']
+            } else if (isset($_POST['licencieId'])) {
+                $licencieId = $_POST['licencieId'];
             }
-        }
+            
+            
+                // Valider les données du formulaire
+
+                $nouveauContact = new ContactModel(0, $nomContact, $prenomContact, $emailContact, $numTelContact, $licencieId);
+                // echo ($nouveauContact);
+                if ($this->contactDAO->create($nouveauContact)) {
+                    if (isset($numLicence)) {
+                        header('Location: ../contact/HomeContactController.php');
+                    } else {
+                        header('Location: ../licencie/HomeLicencieController.php');
+                    }
+                    
+                    exit();
+                } else {
+                    echo "Erreur lors de l'ajout du contact";
+                }
+            
+
+            
+            }
         include('../../views/contact/add_contact.php');
     }
+
     
 }
 
 require_once("../../config/config.php");
 require_once("../../classes/models/ContactModel.php");
 require_once("../../classes/dao/ContactDAO.php");
+require_once("../../classes/dao/LicencieDAO.php");
+
 $contactDAO = new ContactDAO($pdo);
 $controller = new AddContactController($contactDAO);
 if (!isset($_POST['action'])) {

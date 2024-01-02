@@ -7,11 +7,11 @@ class EditCategorieController {
     }
 
     public function editCategorie($id) {
-        // Récupérer le categorie à modifier en utilisant son ID
+        // Récupérer la categorie à modifier en utilisant son ID
         $categorie = $this->categorieDAO->getById($id);
 
         if (!$categorie) {
-            // Le categorie n'a pas été trouvé, vous pouvez rediriger ou afficher un message d'erreur
+            // La categorie n'a pas été trouvé, vous pouvez rediriger ou afficher un message d'erreur
             echo "La categorie n'a pas été trouvé.";
             return;
         }
@@ -29,18 +29,18 @@ class EditCategorieController {
             $categorie->setCodeCategorie($codeCategorie);
             
 
-            // Appeler la méthode du modèle (CategorieDAO) pour mettre à jour le categorie
+            // Appeler la méthode du modèle (CategorieDAO) pour mettre à jour la categorie
             if ($this->categorieDAO->update($categorie)) {
                 // Rediriger vers la page de détails du categorie après la modification
                 header('Location:HomeCategorieController.php');
                 exit();
             } else {
-                // Gérer les erreurs de mise à jour du categorie
+                // Gérer les erreurs de mise à jour de la categorie
                 echo "Erreur lors de la modification du categorie.";
             }
         }
 
-        // Inclure la vue pour afficher le formulaire de modification du contact
+        // Inclure la vue pour afficher le formulaire de modification de la categorie
         include('../../views/categorie/edit_categorie.php');
     }
 }

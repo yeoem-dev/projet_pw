@@ -33,7 +33,7 @@ class AddLicencieController {
                 // Ajoute son contact
                 global $pdo;
                 $licenceDAO = new LicencieDAO($pdo);
-                $id = $licenceDAO->getByLicenseId($numLicencie)->getIdLicencie();
+                $id = $licenceDAO->getByNumLicence($numLicencie)->getIdLicencie();
                 header("Location:../contact/AddContactController.php?id=$id");
                 exit();
             } else {

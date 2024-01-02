@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Liste des licencie</title>
+    <title>Liste des licenciés</title>
     <!-- Ajoutez ici vos liens CSS ou styles pour la mise en forme -->
     <link rel="stylesheet" href="../css/styles.css">
 </head>

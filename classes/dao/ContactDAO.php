@@ -23,7 +23,7 @@ class ContactDAO {
     public function getById($id) {
         global $pdo;
         try {
-            $stmt = $pdo->prepare("SELECT * FROM contact WHERE idCategorie = ?");
+            $stmt = $pdo->prepare("SELECT * FROM contact WHERE idContact = ?");
             $stmt->execute([$id]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -61,7 +61,7 @@ class ContactDAO {
         global $pdo;
         try {
             $stmt = $pdo->prepare("UPDATE contact SET nomContact = ?, prenomContact = ?, emailContact = ?, numTelContact = ? WHERE idContact = ?");
-            $stmt->execute([$contact->getNomContact(), $contact->getPrenomContact(), $contact->getEmailContact(), $contact->getNumTelContact(), $contact->getLicencieId()]);
+            $stmt->execute([$contact->getNomContact(), $contact->getPrenomContact(), $contact->getEmailContact(), $contact->getNumTelContact(), $contact->getIdContact()]);
             return true;
         } catch (PDOException $e) {
             // Gérer les erreurs de mise à jour ici

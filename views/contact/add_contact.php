@@ -7,13 +7,12 @@
 </head>
 <body>
     <h1>Ajouter un contact </h1>
-    <!-- <a href="../../views/licencie/home.php">Retour à la liste des contacts</a> -->
-    
+    <a href="HomeContactController.php">Retour à la liste des contacts</a>
     <form action="../../controllers/contact/AddContactController.php" method="post">
         
-    
-        <input type="hidden" id="licencieId" name="licencieId" value="<?= $_GET['id'] ?>"><br>
-
+        <?php if (isset($_GET['id'])): ?>
+            <input type="hidden" id="licencieId" name="licencieId" value="<?= $_GET['id'] ?>"><br>
+        <?php endif; ?>
 
         <label for="nomContact">Nom:</label>
         <input type="text" id="nomContact" name="nomContact" required><br>
@@ -30,6 +29,10 @@
         <label for="numTelContact">Téléphone :</label>
         <input type="tel" id="numTelContact" name="numTelContact" required><br>
 
+        <?php if (!isset($_GET['id'])): ?>
+            <label for="numTelContact">Numéro du licencié :</label>
+            <input type="text" id="numLicence" name="numLicence"><br>
+        <?php endif; ?>
         <input type="submit" name="action" value="Ajouter">
     </form>
 

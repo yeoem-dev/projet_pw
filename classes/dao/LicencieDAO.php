@@ -39,7 +39,7 @@ class LicencieDAO {
     }
 
     // Méthode pour retrouver un licencié par son numéro de licence
-    public function getByLicenseId($LicenseId) {
+    public function getByNumLicence($LicenseId) {
         global $pdo;
         try {
             $stmt = $pdo->prepare("SELECT * FROM licencie WHERE NumLicence = ?");
@@ -126,3 +126,4 @@ class LicencieDAO {
 
 require_once("CategorieDAO.php");
 require_once('../../classes/models/CategorieModel.php');
+require_once('../../classes/models/LicencieModel.php');

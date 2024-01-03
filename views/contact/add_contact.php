@@ -30,7 +30,7 @@
         <input type="tel" id="numTelContact" name="numTelContact" required><br>
 
         <?php if (!isset($_GET['id'])): ?>
-            <label for="numTelContact">Numéro du licencié :</label>
+            <label for="numLicence">Numéro du licencié :</label>
             <input type="text" id="numLicence" name="numLicence"><br>
         <?php endif; ?>
         <input type="submit" name="action" value="Ajouter">

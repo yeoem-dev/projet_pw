@@ -6,7 +6,7 @@
     <title>Erreur</title>
 </head>
 <body>
-    <a href="../../controllers/contact/HomeContactController.php">Retour à la liste des contacts</a>
+    <a href="index.php">Accueil</a>
     <div>
         <p>Impossible le numéro de licence est erroné</p>
     </div>

@@ -1,26 +1,22 @@
 <?php
 
-class EducateurModel  extends LicencieModel {
+class EducateurModel {
     private $idEducateur;
-    private $email;
-    private $mdp;
+    private $emailEducateur;
+    private $mdpEducateur;
+    private $licencieId;
 
     /**
-     * @param $idLicencie
-     * @param $numLicence
-     * @param $nomLicencie
-     * @param $prenomLicencie
-     * @param $categorieLicencie
+     * @param $licencieId
      * @param $idEducateur
-     * @param $email
-     * @param $mdp
+     * @param $emailEducateur
+     * @param $mdpEducateur
      */
-    public function __construct($idLicencie,$numLicence, $nomLicencie, $prenomLicencie, $categorieLicencie, $idEducateur, $email, $mdp)
-    {
-        parent::__construct($idLicencie, $numLicence, $nomLicencie, $prenomLicencie, $categorieLicencie);
+    public function __construct($idEducateur, $emailEducteur, $mdpEducateur, $licencieId) {
         $this->idEducateur = $idEducateur;
-        $this->email = $email;
-        $this->mdp = $mdp;
+        $this->emailEducateur = $emailEducteur;
+        $this->mdpEducateur = $mdpEducateur;
+        $this->licencieId = $licencieId;
     }
 
     /**
@@ -32,45 +28,41 @@ class EducateurModel  extends LicencieModel {
     }
 
     /**
-     * @param mixed $idEducateur
-     */
-    public function setIdEducateur($idEducateur)
-    {
-        $this->idEducateur = $idEducateur;
-    }
-
-    /**
      * @return mixed
      */
-    public function getEmail()
+    public function getEmailEducateur()
     {
-        return $this->email;
+        return $this->emailEducateur;
     }
 
     /**
      * @param mixed $email
      */
-    public function setEmail($email)
+    public function setEmailEducateur($email)
     {
-        $this->email = $email;
+        $this->emailEducateur = $email;
     }
 
     /**
      * @return mixed
      */
-    public function getMdp()
-    {
-        return $this->mdp;
+    public function getMdpEducateur() {
+        return $this->mdpEducateur;
     }
 
     /**
      * @param mixed $mdp
      */
-    public function setMdp($mdp)
-    {
-        $this->mdp = $mdp;
+    public function setMdpEducateur($mdp) {
+        $this->mdpEducateur = $mdp;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getLicencieId() {
+        return $this->licencieId;
+    }
 
 
 

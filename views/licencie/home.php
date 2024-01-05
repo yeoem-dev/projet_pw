@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <title>Liste des licenciés</title>
     <!-- Ajoutez ici vos liens CSS ou styles pour la mise en forme -->
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="shortcut icon" type="image/png" href="../../assets/favicon.ico"/>
 </head>
 <body>
-<h1>Liste des licencies</h1>
-<a href="../../controllers/licencie/AddLicencieController.php">Ajouter un licencié</a>
-
-<?php if (count($licencies) > 0): ?>
+<div class="main-content">
+    <?php include_once("../../header.php"); ?>
+    <h1>Liste des licencies</h1>
+    <a href="../../controllers/licencie/AddLicencieController.php" class="add-link">Ajouter un licencié</a>
+    
+    <?php if (count($licencies) > 0): ?>
     <table>
         <thead>
         <tr>
@@ -28,7 +31,7 @@
                 <td><?php echo $licencie->getNomLicencie(); ?></td>
                 <td><?php echo $licencie->getPrenomLicencie(); ?></td>
                 <td><?php echo $licencie->getCategorieId()->getCodeCategorie(); ?></td>
-                
+    
                 <td>
                     <a href="ViewLicencieController.php?id=<?php echo $licencie->getIdLicencie(); ?>">Voir</a>
                     <a href="EditLicencieController.php?id=<?php echo $licencie->getIdLicencie(); ?>">Modifier</a>
@@ -39,8 +42,10 @@
         </tbody>
     </table>
     <?php else: ?>
-        <p>Aucun licencié trouvé.</p>
+        <p class="no-data">Aucun licencié trouvé.</p>
     <?php endif; ?>
+</div>
+<?php include_once("../../footer.php"); ?>
 </body>
 </html>
 

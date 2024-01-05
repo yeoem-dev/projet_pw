@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil | Club de sport</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="shortcut icon" type="image/png" href="../../assets/favicon.ico"/>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href=".">Accueil</a></li>
-            <li><a href="controllers/categorie/HomeCategorieController.php">Catégories</a></li>
-            <li><a href="controllers/licencie/HomeLicencieController.php">Licenciés</a></li>
-            <li><a href="controllers/educateur/HomeEducateurController.php">Educateurs</a></li>
-            <li><a href="controllers/contact/HomeContactController.php">Contacts</li>
-        </ul>
-    </nav>
+    <div class="main-content">
+        <?php include_once("header.php"); ?>
+        <div class="hero-section">
+            <div class="content">
+                <h1>Clubsport Automobile</h1>
+                <p>Soyez le prochain licencié.</p>
+                <!-- Vous pouvez ajouter plus de contenu ici selon vos besoins -->
+            </div>
+        </div>
+    </div>
+    <?php include_once("footer.php"); ?>
 </body>
 </html>

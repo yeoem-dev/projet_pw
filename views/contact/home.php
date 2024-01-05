@@ -42,7 +42,7 @@
             </tbody>
         </table>
         <?php else: ?>
-            <p>Aucun contact trouvé.</p>
+            <p class="no-data">Aucun contact trouvé.</p>
         <?php endif; ?>
 </div>
 <?php include_once("../../footer.php"); ?>

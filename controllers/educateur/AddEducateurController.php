@@ -22,6 +22,9 @@ class AddEducateurController {
             $emailEducateur = $_POST['emailEducateur'];
             $mdpEducateur = $_POST['mdpEducateur'];
 
+            // Hasher le mot de passe
+            $mdpHashe = password_hash($mdpEducateur,PASSWORD_DEFAULT);
+
             $licencie = new LicencieDAO($pdo);
             $licencieId = $licencie->getByNumLicence($numLicence);
 
@@ -30,7 +33,7 @@ class AddEducateurController {
 
                 // Valider les données du formulaire
 
-                $nouvelEducateur = new EducateurModel(0, $emailEducateur, $mdpEducateur, $licencieId);
+                $nouvelEducateur = new EducateurModel(0, $emailEducateur, $mdpHashe, $licencieId);
 
                 if ($this->educateurDAO->create($nouvelEducateur)) {
                     header("Location:../educateur/HomeEducateurController.php");

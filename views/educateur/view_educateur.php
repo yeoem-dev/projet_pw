@@ -7,7 +7,11 @@
             <link rel="stylesheet" href="../../assets/css/style.css">
             <link rel="shortcut icon" type="image/png" href="../../assets/favicon.ico"/>
     </head>
-    <body>    
+    <body>
+    <?php
+    require_once '../../utils/SessionUtil.php'; 
+    checkUserSession();
+    ?>    
         <div class="main-content">
             <?php include_once("../../header.php"); ?>
             <div class="details-container">

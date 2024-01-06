@@ -1,3 +1,8 @@
+<?php
+require_once 'utils/SessionUtil.php'; 
+checkUserSession();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>

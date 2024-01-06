@@ -8,7 +8,10 @@
     <link rel="shortcut icon" type="image/png" href="../../assets/favicon.ico"/>
 </head>
 <body>
-
+<?php
+    require_once '../../utils/SessionUtil.php'; 
+    checkUserSession();
+?>
 <div class="main-content">
     <?php include_once("../../header.php"); ?>
     <h1>Liste des educateurs</h1>

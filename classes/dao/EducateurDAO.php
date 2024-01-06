@@ -84,5 +84,27 @@ class EducateurDAO {
             return false;
         }
     }
+
+    public static function authentification($email, $mdp) {
+        global $pdo;
+    
+        try {
+            $stmt = $pdo->prepare("SELECT * FROM educateur WHERE emailEducateur = ?");
+            var_dump($stmt);
+            $stmt->execute([$email]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            if ($row && $row['estAdmin'] && password_verify($mdp, $row['mdpEducateur'])) {
+                // Authentification réussie
+                return $row['idEducateur'];
+            }
+            return null; // Authentification échouée
+        } catch (PDOException $e) {
+            // Gérer l'exception
+            // Log l'erreur sans exposer de détails sensibles
+            return null;
+        }
+    }
+    
 }
 require_once("../../classes/dao/LicencieDAO.php");

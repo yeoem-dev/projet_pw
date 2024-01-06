@@ -44,6 +44,10 @@
     </style>
 </head>
 <body>
+    <?php
+    require_once 'utils/SessionUtil.php'; 
+    checkUserSession();
+    ?>
     <a href="index.php">Accueil</a>
     <div class="error-container">
         <p>Impossible, le numéro de licence est erroné.</p>

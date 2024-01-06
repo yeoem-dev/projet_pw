@@ -8,6 +8,10 @@
     <link rel="shortcut icon" type="image/png" href="../../assets/favicon.ico"/>
 </head>
 <body>
+    <?php
+    require_once '../../utils/SessionUtil.php'; 
+    checkUserSession();
+    ?>
     <div class="main-container">
         <?php include_once("../../header.php"); ?>
         <div class="add-form-container">

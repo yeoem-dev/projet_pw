@@ -6,4 +6,5 @@
     <a href="../../controllers/licencie/HomeLicencieController.php">Licenciés</a>
     <a href="../../controllers/educateur/HomeEducateurController.php">Educateurs</a>
     <a href="../../controllers/contact/HomeContactController.php">Contacts</a>
+    <a href="../../controllers/auth/LogoutController.php" class="logout-button">Deconnexion</a>
 </nav>

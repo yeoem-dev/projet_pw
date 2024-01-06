@@ -31,12 +31,12 @@
                         </option>
                     <?php endforeach; ?>
                 </select><br>
-                <label for="numLicence">Numéro de licence :</label>
-                <input type="text" id="numLicence" name="numLicence" required><br>
+                <input type="hidden" id="numLicence" name="numLicence" required>
                 <input type="submit" name="action" value="Ajouter">
             </form>
         </div>
     </div>
+    <script src="../../assets/js/functions.js"></script>
     <?php include_once("../../footer.php"); ?>
 </body>
 </html>

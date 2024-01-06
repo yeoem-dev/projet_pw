@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Connexion</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="shortcut icon" type="image/png" href="../../assets/favicon.ico"/>
 </head>
 <body>
     <div class="form-container">

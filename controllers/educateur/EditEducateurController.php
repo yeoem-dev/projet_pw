@@ -20,14 +20,18 @@ class EditEducateurController {
             // Récupérer les données du formulaire
             $emailEducateur = $_POST['emailEducateur'];
             $mdpEducateur = $_POST['mdpEducateur'];
-            
+            $choix = $_POST['choix'];
+
+            // Hashé le mot de passe 
+            $mdpHashe = password_hash($mdpEducateur, PASSWORD_DEFAULT);
 
             // Valider les données du formulaire (ajoutez des validations si nécessaire)
 
             // Mettre à jour les détails du educateur
             
             $educateur->setEmailEducateur($emailEducateur);
-            $educateur->setmdpEducateur($mdpEducateur);
+            $educateur->setmdpEducateur($mdpHashe);
+            $educateur->setEstAdmin($choix);
             
 
             // Appeler la méthode du modèle (EducateurDAO) pour mettre à jour le educateur

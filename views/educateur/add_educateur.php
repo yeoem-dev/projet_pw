@@ -20,8 +20,20 @@
         
                 <label for="mdpEducateur"> Mot de passe:</label>
                 <input type="password" id="mdpEducateur" name="mdpEducateur" required><br>
+
                 <label for="numLicence">Numéro du licencié :</label>
                 <input type="text" id="numLicence" name="numLicence"><br>
+
+
+                <div class="radio-group">
+                    <h2>Est-il administrateur ?</h2>
+                    <input type="radio" id="option1" name="choix" value="1">
+                    <label for="option1">Oui</label><br>
+
+                    <input type="radio" id="option2" name="choix" value="0" checked>
+                    <label for="option2">Non</label><br>
+                </div>
+
                 <input type="submit" name="action" value="Ajouter">
             </form>
         </div>

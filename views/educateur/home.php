@@ -21,6 +21,7 @@
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Email</th>
+                <th>Admininstrateur</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -30,6 +31,7 @@
                     <td><?php echo $educateur->getLicencieId()->getNomLicencie(); ?></td>
                     <td><?php echo $educateur->getLicencieId()->getPrenomLicencie(); ?></td>
                     <td><?php echo $educateur->getEmailEducateur(); ?></td>
+                    <td><?php  echo ($educateur->getEstAdmin() > 0) ? 'Oui' : 'Non'; ?></td>
     
                     <td>
                         <a href="ViewEducateurController.php?id=<?php echo $educateur->getIdEducateur(); ?>">Voir</a>

@@ -20,6 +20,15 @@
                     <input type="text" id="emailEducateur" name="emailEducateur" value="<?php echo $educateur->getEmailEducateur(); ?>" required><br>
                     <label for="mdpEducateur">Nouveau mot de passe :</label>
                     <input type="password" id="mdpEducateur" name="mdpEducateur" required><br>
+
+                    <div class="radio-group">
+                        <h2>Est-il administrateur ?</h2>
+                        <input type="radio" id="option1" name="choix" value="1">
+                        <label for="option1">Oui</label><br>
+
+                        <input type="radio" id="option2" name="choix" value="0" checked>
+                        <label for="option2">Non</label><br>
+                    </div>
                     <input type="submit" value="Modifier">
                 </form>
             <?php else: ?>

@@ -5,6 +5,7 @@ class EducateurModel {
     private $emailEducateur;
     private $mdpEducateur;
     private $licencieId;
+    private $estAdmin;
 
     /**
      * @param $licencieId
@@ -12,11 +13,12 @@ class EducateurModel {
      * @param $emailEducateur
      * @param $mdpEducateur
      */
-    public function __construct($idEducateur, $emailEducteur, $mdpEducateur, $licencieId) {
+    public function __construct($idEducateur, $emailEducteur, $mdpEducateur, $licencieId, $estAdmin) {
         $this->idEducateur = $idEducateur;
         $this->emailEducateur = $emailEducteur;
         $this->mdpEducateur = $mdpEducateur;
         $this->licencieId = $licencieId;
+        $this->estAdmin = $estAdmin;
     }
 
     /**
@@ -64,6 +66,18 @@ class EducateurModel {
         return $this->licencieId;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getEstAdmin() {
+        return $this->estAdmin;
+    }
 
+    /**
+     * @param mixed
+     */
+    public function setEstAdmin($choix) {
+        $this->estAdmin = $choix;
+    }
 
 }

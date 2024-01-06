@@ -11,8 +11,8 @@ class EducateurDAO {
         global $pdo;
 
         try {
-            $stmt = $pdo->prepare("INSERT INTO educateur (emailEducateur, mdpEducateur, licencieId) VALUES (?, ?, ?)");
-            $stmt->execute([$educateur->getEmailEducateur(), $educateur->getMdpEducateur(), $educateur->getLicencieId()]);
+            $stmt = $pdo->prepare("INSERT INTO educateur (emailEducateur, mdpEducateur, licencieId, estAdmin) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$educateur->getEmailEducateur(), $educateur->getMdpEducateur(), $educateur->getLicencieId(), $educateur->getEstAdmin()]);
             return true;
         } catch (PDOException $e) {
             // Gérer les erreurs d'insertion ici
@@ -29,7 +29,7 @@ class EducateurDAO {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($row) {
-                return new EducateurModel($row['idEducateur'],$row['emailEducateur'], $row['mdpEducateur'], $row['licencieId']);
+                return new EducateurModel($row['idEducateur'],$row['emailEducateur'], $row['mdpEducateur'], $row['licencieId'], $row['estAdmin']);
             } else {
                 return null; // Aucun educateur trouvé avec cet ID
             }
@@ -49,7 +49,7 @@ class EducateurDAO {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $licencieDAO = new LicencieDAO($pdo);
                 $licencie = $licencieDAO->getById($row['licencieId']);
-                $educateurs[] = new EducateurModel($row['idEducateur'],$row['emailEducateur'], $row['mdpEducateur'], $licencie);
+                $educateurs[] = new EducateurModel($row['idEducateur'],$row['emailEducateur'], $row['mdpEducateur'], $licencie, $row['estAdmin']);
             }
 
             return $educateurs;
@@ -63,8 +63,8 @@ class EducateurDAO {
     public function update(EducateurModel $educateur) {
         global $pdo;
         try {
-            $stmt = $pdo->prepare("UPDATE educateur SET emailEducateur = ?, mdpEducateur = ? WHERE idEducateur = ?");
-            $stmt->execute([$educateur->getEmailEducateur(), $educateur->getMdpEducateur(), $educateur->getIdEducateur()]);
+            $stmt = $pdo->prepare("UPDATE educateur SET emailEducateur = ?, mdpEducateur = ? , estAdmin = ? WHERE idEducateur = ?");
+            $stmt->execute([$educateur->getEmailEducateur(), $educateur->getMdpEducateur(), $educateur-> getEstAdmin(), $educateur->getIdEducateur()]);
             return true;
         } catch (PDOException $e) {
             // Gérer les erreurs de mise à jour ici

@@ -385,3 +385,18 @@ select {
     text-align: center;
     margin-top: 1em;
 }
+
+.add-form-container .radio-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em; /* Espacement en bas */
+}
+
+.add-form-container .radio-group label {
+    margin-right: 10px; /* Espacement à droite du label */
+    margin-left: 5px; /* Espacement à gauche du bouton radio */
+}
+
+.add-form-container input[type="radio"] {
+    margin-top: 0; /* Aligner les boutons radio avec les labels */
+}

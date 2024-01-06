@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS `educateur` (
   `emailEducateur` varchar(100) NOT NULL,
   `mdpEducateur` varchar(100) NOT NULL,
   `licencieId` int NOT NULL,
+  `estAdmin` tinyint(1) NOT NULL
   PRIMARY KEY (`idEducateur`),
   UNIQUE KEY `emailEducateur` (`emailEducateur`),
   FOREIGN KEY (`licencieId`) REFERENCES licencie(`idLicencie`) ON DELETE CASCADE

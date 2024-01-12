@@ -102,8 +102,8 @@ class LicencieDAO {
     public function update(LicencieModel $licencie) {
         global $pdo;
         try {
-            $stmt = $pdo->prepare("UPDATE licencie SET nomLicencie = ?, prenomLicencie = ?, categorieId = ?");
-            $stmt->execute([$licencie->getNomLicencie(), $licencie->getPrenomLicencie(), $licencie->getCategorieId()]);
+            $stmt = $pdo->prepare("UPDATE licencie SET nomLicencie = ?, prenomLicencie = ?, categorieId = ? WHERE idLicencie = ?");
+            $stmt->execute([$licencie->getNomLicencie(), $licencie->getPrenomLicencie(), $licencie->getCategorieId(), $licencie->getIdLicencie()]);
             return true;
         } catch (PDOException $e) {
             return false;

@@ -11,7 +11,7 @@ class EducateurDAO {
         global $pdo;
 
         try {
-            $stmt = $pdo->prepare("INSERT INTO educateur (emailEducateur, mdpEducateur, licencieId, estAdmin) VALUES (?, ?, ?, ?)");
+            $stmt = $pdo->prepare("INSERT INTO educateur (email_educateur, mdp_educateur, licencie_id, est_admin) VALUES (?, ?, ?, ?)");
             $stmt->execute([$educateur->getEmailEducateur(), $educateur->getMdpEducateur(), $educateur->getLicencieId(), $educateur->getEstAdmin()]);
             return true;
         } catch (PDOException $e) {
@@ -24,12 +24,12 @@ class EducateurDAO {
     public function getById($id) {
         global $pdo;
         try {
-            $stmt = $pdo->prepare("SELECT * FROM educateur WHERE idEducateur = ?");
+            $stmt = $pdo->prepare("SELECT * FROM educateur WHERE id = ?");
             $stmt->execute([$id]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($row) {
-                return new EducateurModel($row['idEducateur'],$row['emailEducateur'], $row['mdpEducateur'], $row['licencieId'], $row['estAdmin']);
+                return new EducateurModel($row['id'],$row['email_educateur'], $row['mdp_educateur'], $row['licencie_id'], $row['est_admin']);
             } else {
                 return null; // Aucun educateur trouvé avec cet ID
             }
@@ -48,8 +48,8 @@ class EducateurDAO {
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $licencieDAO = new LicencieDAO($pdo);
-                $licencie = $licencieDAO->getById($row['licencieId']);
-                $educateurs[] = new EducateurModel($row['idEducateur'],$row['emailEducateur'], $row['mdpEducateur'], $licencie, $row['estAdmin']);
+                $licencie = $licencieDAO->getById($row['licencie_id']);
+                $educateurs[] = new EducateurModel($row['id'],$row['email_educateur'], $row['mdp_educateur'], $licencie, $row['est_admin']);
             }
 
             return $educateurs;
@@ -63,7 +63,7 @@ class EducateurDAO {
     public function update(EducateurModel $educateur) {
         global $pdo;
         try {
-            $stmt = $pdo->prepare("UPDATE educateur SET emailEducateur = ?, mdpEducateur = ? , estAdmin = ? WHERE idEducateur = ?");
+            $stmt = $pdo->prepare("UPDATE educateur SET email_educateur = ?, mdp_educateur = ? , estAdmin = ? WHERE id = ?");
             $stmt->execute([$educateur->getEmailEducateur(), $educateur->getMdpEducateur(), $educateur-> getEstAdmin(), $educateur->getIdEducateur()]);
             return true;
         } catch (PDOException $e) {
@@ -76,7 +76,7 @@ class EducateurDAO {
     public function deleteById($id) {
         global $pdo;
         try {
-            $stmt = $pdo->prepare("DELETE FROM educateur WHERE idEducateur = ?");
+            $stmt = $pdo->prepare("DELETE FROM educateur WHERE id = ?");
             $stmt->execute([$id]);
             return true;
         } catch (PDOException $e) {
@@ -89,14 +89,14 @@ class EducateurDAO {
         global $pdo;
     
         try {
-            $stmt = $pdo->prepare("SELECT * FROM educateur WHERE emailEducateur = ?");
+            $stmt = $pdo->prepare("SELECT * FROM educateur WHERE email_educateur = ?");
             var_dump($stmt);
             $stmt->execute([$email]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
     
-            if ($row && $row['estAdmin'] && password_verify($mdp, $row['mdpEducateur'])) {
+            if ($row && $row['est_admin'] && password_verify($mdp, $row['mdp_educateur'])) {
                 // Authentification réussie
-                return $row['idEducateur'];
+                return $row['id_educateur'];
             }
             return null; // Authentification échouée
         } catch (PDOException $e) {

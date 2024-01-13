@@ -9,7 +9,7 @@ class LicencieDAO {
     public function create(LicencieModel $licencie) {
         global $pdo;
         try {
-            $stmt = $pdo->prepare("INSERT INTO licencie (numLicence, nomLicencie, prenomLicencie, categorieId) VALUES (?,?,?,?)");
+            $stmt = $pdo->prepare("INSERT INTO licencie (num_licence, nom_licencie, prenom_licencie, categorie_id) VALUES (?,?,?,?)");
             $stmt->execute([$licencie->getNumLicence(), $licencie->getNomLicencie(), $licencie->getPrenomLicencie(), $licencie->getCategorieId()]);
             return true;
         } catch (PDOException $e) {
@@ -22,14 +22,14 @@ class LicencieDAO {
     public function getById($id) {
         global $pdo;
         try {
-            $stmt = $pdo->prepare("SELECT l.*, codeCategorie FROM licencie l JOIN categorie c ON l.categorieId = c.idCategorie  WHERE idLicencie = ?");
+            $stmt = $pdo->prepare("SELECT l.*, code_categorie FROM licencie l JOIN categorie c ON l.categorie_id = c.id  WHERE l.id = ?");
             $stmt->execute([$id]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($row) {
                 $categorieDAO = new CategorieDAO($pdo);
-                $categorie = $categorieDAO->getById($row['categorieId']);
-                return new LicencieModel($row['idLicencie'], $row['numLicence'], $row['nomLicencie'], $row['prenomLicencie'], $categorie);
+                $categorie = $categorieDAO->getById($row['categorie_id']);
+                return new LicencieModel($row['id'], $row['num_licence'], $row['nom_licencie'], $row['prenom_licencie'], $categorie);
             } else {
                 return null;
             }
@@ -42,12 +42,12 @@ class LicencieDAO {
     public function getByNumLicence($LicenseId) {
         global $pdo;
         try {
-            $stmt = $pdo->prepare("SELECT * FROM licencie WHERE NumLicence = ?");
+            $stmt = $pdo->prepare("SELECT * FROM licencie WHERE Num_licence = ?");
             $stmt->execute([$LicenseId]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($row) {
-                return new LicencieModel($row['idLicencie'], $row['numLicence'], $row['nomLicencie'], $row['prenomLicencie'], $row['categorieId']);
+                return new LicencieModel($row['id'], $row['num_licence'], $row['nom_licencie'], $row['prenom_licencie'], $row['categorie_id']);
             } else {
                 return null;
             }
@@ -59,12 +59,12 @@ class LicencieDAO {
     public function getContactById($id) {
         global $pdo;
         try {
-            $stmt = $pdo->prepare("SELECT nomContact, prenomContact FROM licencie l JOIN contact c WHERE l.idLicencie = c.licencieId AND l.idLicencie = ?");
+            $stmt = $pdo->prepare("SELECT nom_contact, prenom_contact FROM licencie l JOIN contact c WHERE l.id = c.licencie_id AND l.id = ?");
             $stmt->execute([$id]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($row) {
-                return new LicencieModel($row['idLicencie'], $row['numLicence'], $row['nomLicencie'], $row['prenomLicencie'], $row['categorieId']);
+                return new LicencieModel($row['id'], $row['num_licence'], $row['nom_licencie'], $row['prenom_licencie'], $row['categorie_id']);
             } else {
                 return null;
             }
@@ -82,12 +82,12 @@ class LicencieDAO {
             $licencies = [];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $categorieDAO = new CategorieDAO($pdo);
-                $categorie = $categorieDAO->getById($row['categorieId']);
+                $categorie = $categorieDAO->getById($row['categorie_id']);
                 $licencies[] = new LicencieModel(
-                    $row['idLicencie'], 
-                    $row['numLicence'], 
-                    $row['nomLicencie'], 
-                    $row['prenomLicencie'], 
+                    $row['id'], 
+                    $row['num_licence'], 
+                    $row['nom_licencie'], 
+                    $row['prenom_licencie'], 
                     $categorie
                 );
             }
@@ -102,7 +102,7 @@ class LicencieDAO {
     public function update(LicencieModel $licencie) {
         global $pdo;
         try {
-            $stmt = $pdo->prepare("UPDATE licencie SET nomLicencie = ?, prenomLicencie = ?, categorieId = ? WHERE idLicencie = ?");
+            $stmt = $pdo->prepare("UPDATE licencie SET nom_licencie = ?, prenom_licencie = ?, categorie_id = ? WHERE id = ?");
             $stmt->execute([$licencie->getNomLicencie(), $licencie->getPrenomLicencie(), $licencie->getCategorieId(), $licencie->getIdLicencie()]);
             return true;
         } catch (PDOException $e) {
@@ -114,7 +114,7 @@ class LicencieDAO {
     public function deleteById($id) {
         global $pdo;
         try {
-            $stmt = $pdo->prepare("DELETE FROM licencie WHERE idLicencie = ?");
+            $stmt = $pdo->prepare("DELETE FROM licencie WHERE id = ?");
             $stmt->execute([$id]);
             // Assurer la suppression en cascade
             return true;

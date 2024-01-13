@@ -11,7 +11,7 @@ class CategorieDAO {
     public function create(CategorieModel $categorie) {
         global $pdo;
         try {
-            $stmt = $pdo->prepare("INSERT INTO categorie (nomCategorie, codeCategorie) VALUES (?, ?)");
+            $stmt = $pdo->prepare("INSERT INTO categorie (nom_categorie, code_categorie) VALUES (?, ?)");
             $stmt->execute([$categorie->getNomCategorie(), $categorie->getCodeCategorie()]);
             return true;
         } catch (PDOException $e) {
@@ -25,12 +25,12 @@ class CategorieDAO {
     public function getById($id) {
         global $pdo;
             try {
-                $stmt = $pdo->prepare("SELECT * FROM categorie WHERE idCategorie = ?");
+                $stmt = $pdo->prepare("SELECT * FROM categorie WHERE id = ?");
                 $stmt->execute([$id]);
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
     
                 if ($row) {
-                    return new CategorieModel($row['idCategorie'], $row['nomCategorie'], $row['codeCategorie']);
+                    return new CategorieModel($row['id'], $row['nom_categorie'], $row['code_categorie']);
                 } else {
                     return null; // Aucun contact trouvé avec cet ID
                 }
@@ -49,7 +49,7 @@ class CategorieDAO {
             $categories = [];
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $categories[] = new CategorieModel($row['idCategorie'], $row['nomCategorie'], $row['codeCategorie']);
+                $categories[] = new CategorieModel($row['id'], $row['nom_categorie'], $row['code_categorie']);
             }
 
             return $categories;
@@ -63,7 +63,7 @@ class CategorieDAO {
     public function update(CategorieModel $categorie) {
         global $pdo;
         try {
-            $stmt = $pdo->prepare("UPDATE categorie SET nomCategorie = ?, codeCategorie = ? WHERE idCategorie = ?");
+            $stmt = $pdo->prepare("UPDATE categorie SET nom_categorie = ?, code_categorie = ? WHERE id = ?");
             $stmt->execute([$categorie->getNomCategorie(), $categorie->getCodeCategorie(), $categorie->getIdCategorie()]);
             return true;
         } catch (PDOException $e) {
@@ -75,7 +75,7 @@ class CategorieDAO {
     public function deleteById($id) {
         global $pdo;
         try {
-            $stmt = $pdo->prepare("DELETE FROM categorie WHERE idCategorie = ?");
+            $stmt = $pdo->prepare("DELETE FROM categorie WHERE id = ?");
             $stmt->execute([$id]);
 
             return true;

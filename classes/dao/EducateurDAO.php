@@ -63,7 +63,7 @@ class EducateurDAO {
     public function update(EducateurModel $educateur) {
         global $pdo;
         try {
-            $stmt = $pdo->prepare("UPDATE educateur SET email_educateur = ?, mdp_educateur = ? , estAdmin = ? WHERE id = ?");
+            $stmt = $pdo->prepare("UPDATE educateur SET email_educateur = ?, mdp_educateur = ? , est_admin = ? WHERE id = ?");
             $stmt->execute([$educateur->getEmailEducateur(), $educateur->getMdpEducateur(), $educateur-> getEstAdmin(), $educateur->getIdEducateur()]);
             return true;
         } catch (PDOException $e) {
@@ -96,7 +96,7 @@ class EducateurDAO {
     
             if ($row && $row['est_admin'] && password_verify($mdp, $row['mdp_educateur'])) {
                 // Authentification réussie
-                return $row['id_educateur'];
+                return $row['id'];
             }
             return null; // Authentification échouée
         } catch (PDOException $e) {

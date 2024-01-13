@@ -21,6 +21,30 @@ class CategorieRepository extends ServiceEntityRepository
         parent::__construct($registry, Categorie::class);
     }
 
+    public function findLicenciesByCategorie($id)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.licencies', 'l')
+            ->addSelect('l')
+            ->where('c.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findContactsByCategorie($id)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.licencies', 'l')
+            ->leftJoin('l.contacts', 'contact')
+            ->addSelect('l')
+            ->addSelect('contact')
+            ->where('c.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Categorie[] Returns an array of Categorie objects
 //     */

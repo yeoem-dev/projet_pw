@@ -13,21 +13,21 @@ class Contact
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $nomContact = null;
+    #[ORM\Column(length: 50)]
+    private ?string $nom_contact = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $prenomContact = null;
+    #[ORM\Column(length: 50)]
+    private ?string $prenom_contact = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $emailContact = null;
+    #[ORM\Column(length: 100)]
+    private ?string $email_contact = null;
 
-    #[ORM\Column(length: 10)]
-    private ?string $numTelContact = null;
+    #[ORM\Column(length: 15)]
+    private ?string $num_tel_contact = null;
 
     #[ORM\ManyToOne(inversedBy: 'contacts')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Licencie $licencieId = null;
+    private ?Licencie $Licencie = null;
 
     public function getId(): ?int
     {
@@ -36,60 +36,60 @@ class Contact
 
     public function getNomContact(): ?string
     {
-        return $this->nomContact;
+        return $this->nom_contact;
     }
 
-    public function setNomContact(string $nomContact): static
+    public function setNomContact(string $nom_contact): static
     {
-        $this->nomContact = $nomContact;
+        $this->nom_contact = $nom_contact;
 
         return $this;
     }
 
     public function getPrenomContact(): ?string
     {
-        return $this->prenomContact;
+        return $this->prenom_contact;
     }
 
-    public function setPrenomContact(string $prenomContact): static
+    public function setPrenomContact(string $prenom_contact): static
     {
-        $this->prenomContact = $prenomContact;
+        $this->prenom_contact = $prenom_contact;
 
         return $this;
     }
 
     public function getEmailContact(): ?string
     {
-        return $this->emailContact;
+        return $this->email_contact;
     }
 
-    public function setEmailContact(string $emailContact): static
+    public function setEmailContact(string $email_contact): static
     {
-        $this->emailContact = $emailContact;
+        $this->email_contact = $email_contact;
 
         return $this;
     }
 
     public function getNumTelContact(): ?string
     {
-        return $this->numTelContact;
+        return $this->num_tel_contact;
     }
 
-    public function setNumTelContact(string $numTelContact): static
+    public function setNumTelContact(string $num_tel_contact): static
     {
-        $this->numTelContact = $numTelContact;
+        $this->num_tel_contact = $num_tel_contact;
 
         return $this;
     }
 
-    public function getLicencieId(): ?Licencie
+    public function getLicencie(): ?Licencie
     {
-        return $this->licencieId;
+        return $this->Licencie;
     }
 
-    public function setLicencieId(?Licencie $licencieId): static
+    public function setLicencie(?Licencie $Licencie): static
     {
-        $this->licencieId = $licencieId;
+        $this->Licencie = $Licencie;
 
         return $this;
     }

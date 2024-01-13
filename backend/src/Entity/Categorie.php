@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\CategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use App\Repository\CategorieRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
@@ -16,17 +16,47 @@ class Categorie
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $nomCategorie = null;
+    private ?string $nom_categorie = null;
 
-    #[ORM\Column(length: 5)]
-    private ?string $codeCategorie = null;
+    #[ORM\Column(length: 10)]
+    private ?string $code_categorie = null;
 
-    #[ORM\OneToMany(mappedBy: 'CategorieId', targetEntity: Licencie::class)]
-    private Collection $licencies;
+    #[ORM\OneToMany(mappedBy: 'Categorie', targetEntity: Licencie::class)]
+    private $licencies;
 
     public function __construct()
     {
         $this->licencies = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|Licencie[]
+     */
+    public function getLicencies(): Collection
+    {
+        return $this->licencies;
+    }
+
+    public function addLicencie(Licencie $licencie): self
+    {
+        if (!$this->licencies->contains($licencie)) {
+            $this->licencies[] = $licencie;
+            $licencie->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLicencie(Licencie $licencie): self
+    {
+        if ($this->licencies->removeElement($licencie)) {
+            // set the owning side to null (unless already changed)
+            if ($licencie->getCategorie() === $this) {
+                $licencie->setCategorie(null);
+            }
+        }
+
+        return $this;
     }
 
     public function getId(): ?int
@@ -36,54 +66,24 @@ class Categorie
 
     public function getNomCategorie(): ?string
     {
-        return $this->nomCategorie;
+        return $this->nom_categorie;
     }
 
-    public function setNomCategorie(string $nomCategorie): static
+    public function setNomCategorie(string $nom_categorie): static
     {
-        $this->nomCategorie = $nomCategorie;
+        $this->nom_categorie = $nom_categorie;
 
         return $this;
     }
 
     public function getCodeCategorie(): ?string
     {
-        return $this->codeCategorie;
+        return $this->code_categorie;
     }
 
-    public function setCodeCategorie(string $codeCategorie): static
+    public function setCodeCategorie(string $code_categorie): static
     {
-        $this->codeCategorie = $codeCategorie;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Licencie>
-     */
-    public function getLicencies(): Collection
-    {
-        return $this->licencies;
-    }
-
-    public function addLicency(Licencie $licency): static
-    {
-        if (!$this->licencies->contains($licency)) {
-            $this->licencies->add($licency);
-            $licency->setCategorieId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLicency(Licencie $licency): static
-    {
-        if ($this->licencies->removeElement($licency)) {
-            // set the owning side to null (unless already changed)
-            if ($licency->getCategorieId() === $this) {
-                $licency->setCategorieId(null);
-            }
-        }
+        $this->code_categorie = $code_categorie;
 
         return $this;
     }

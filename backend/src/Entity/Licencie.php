@@ -15,20 +15,20 @@ class Licencie
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 8)]
-    private ?string $numLicence = null;
+    #[ORM\Column(length: 20)]
+    private ?string $num_licence = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $nomLicencie = null;
+    #[ORM\Column(length: 50)]
+    private ?string $nom_licencie = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $prenomCategorie = null;
+    #[ORM\Column(length: 50)]
+    private ?string $prenom_licencie = null;
 
-    #[ORM\ManyToOne(inversedBy: 'licencies')]
+    #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Categorie $CategorieId = null;
+    private ?Categorie $Categorie = null;
 
-    #[ORM\OneToMany(mappedBy: 'licencieId', targetEntity: Contact::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'Licencie', targetEntity: Contact::class, orphanRemoval: true)]
     private Collection $contacts;
 
     public function __construct()
@@ -43,48 +43,48 @@ class Licencie
 
     public function getNumLicence(): ?string
     {
-        return $this->numLicence;
+        return $this->num_licence;
     }
 
-    public function setNumLicence(string $numLicence): static
+    public function setNumLicence(string $num_licence): static
     {
-        $this->numLicence = $numLicence;
+        $this->num_licence = $num_licence;
 
         return $this;
     }
 
     public function getNomLicencie(): ?string
     {
-        return $this->nomLicencie;
+        return $this->nom_licencie;
     }
 
-    public function setNomLicencie(string $nomLicencie): static
+    public function setNomLicencie(string $nom_licencie): static
     {
-        $this->nomLicencie = $nomLicencie;
+        $this->nom_licencie = $nom_licencie;
 
         return $this;
     }
 
-    public function getPrenomCategorie(): ?string
+    public function getPrenomLicencie(): ?string
     {
-        return $this->prenomCategorie;
+        return $this->prenom_licencie;
     }
 
-    public function setPrenomCategorie(string $prenomCategorie): static
+    public function setPrenomLicencie(string $prenom_licencie): static
     {
-        $this->prenomCategorie = $prenomCategorie;
+        $this->prenom_licencie = $prenom_licencie;
 
         return $this;
     }
 
-    public function getCategorieId(): ?Categorie
+    public function getCategorie(): ?Categorie
     {
-        return $this->CategorieId;
+        return $this->Categorie;
     }
 
-    public function setCategorieId(?Categorie $CategorieId): static
+    public function setCategorie(?Categorie $Categorie): static
     {
-        $this->CategorieId = $CategorieId;
+        $this->Categorie = $Categorie;
 
         return $this;
     }
@@ -101,7 +101,7 @@ class Licencie
     {
         if (!$this->contacts->contains($contact)) {
             $this->contacts->add($contact);
-            $contact->setLicencieId($this);
+            $contact->setLicencie($this);
         }
 
         return $this;
@@ -111,8 +111,8 @@ class Licencie
     {
         if ($this->contacts->removeElement($contact)) {
             // set the owning side to null (unless already changed)
-            if ($contact->getLicencieId() === $this) {
-                $contact->setLicencieId(null);
+            if ($contact->getLicencie() === $this) {
+                $contact->setLicencie(null);
             }
         }
 

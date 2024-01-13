@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Licenciés de la Catégorie{% endblock %}
+
+{% block body %}
+<h1>Licenciés de la Catégorie: {{ categorie.getNomCategorie }}</h1>
+
+<ul>
+    {% for licencie in licencies %}
+    <li>{{ licencie.getNomLicencie }} {{ licencie.getPrenomLicencie }} - {{ licencie.getNumLicence }}</li>
+    {% endfor %}
+</ul>
+
+<a href="{{ path('categorie_index') }}">Retour aux catégories</a>
+{% endblock %}

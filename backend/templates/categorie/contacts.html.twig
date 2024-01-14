@@ -1,38 +1,40 @@
-{# templates/categorie/contacts.html.twig #}
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Contacts de la Catégorie{% endblock %}
 
 {% block body %}
-<h1>Contacts de la Catégorie</h1>
+<div class="container mt-4">
+    <h1 class="mb-4">Contacts de la Catégorie</h1>
 
-{% if contacts is empty %}
-    <p>Aucun contact trouvé pour cette catégorie.</p>
-{% else %}
-    <table>
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Email</th>
-                <th>Numéro de Téléphone</th>
-                <th>Licencié</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for contact in contacts %}
-                <tr>
-                    <td>{{ contact.getNomContact() }}</td>
-                    <td>{{ contact.getPrenomContact() }}</td>
-                    <td>{{ contact.getEmailContact() }}</td>
-                    <td>{{ contact.getNumTelContact() }}</td>
-                    <td>{{ contact.getLicencie().getNomLicencie() }} {{ contact.getLicencie().getPrenomLicencie() }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% endif %}
+    {% if contacts is empty %}
+        <div class="alert alert-info">Aucun contact trouvé pour cette catégorie.</div>
+    {% else %}
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Email</th>
+                        <th>Numéro de Téléphone</th>
+                        <th>Licencié</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contact in contacts %}
+                        <tr>
+                            <td>{{ contact.getNomContact() }}</td>
+                            <td>{{ contact.getPrenomContact() }}</td>
+                            <td>{{ contact.getEmailContact() }}</td>
+                            <td>{{ contact.getNumTelContact() }}</td>
+                            <td>{{ contact.getLicencie().getNomLicencie() }} {{ contact.getLicencie().getPrenomLicencie() }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
 
-<a href="{{ path('categorie_index') }}">Retour aux catégories</a>
+    <a href="{{ path('categorie_index') }}" class="btn btn-secondary mt-3">Retour aux catégories</a>
+</div>
 {% endblock %}

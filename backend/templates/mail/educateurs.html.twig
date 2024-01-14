@@ -3,42 +3,45 @@
 {% block title %}Mails des Éducateurs{% endblock %}
 
 {% block body %}
-<section class="mails-educateur">
-    <h1>Mails des Éducateurs</h1>
-    <a href="{{ path('app_send_mail_educateur') }}" class="btn btn-primary">Écrire un Mail</a>
-    <table class="mail-table">
-        <thead>
-            <tr>
-                <th>Objet</th>
-                <th>Message</th>
-                <th>Destinataires</th>
-                <th>Date d'envoi</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for mail in mails %}
+<section class="mails-educateur container mt-4">
+    <h1 class="mb-3">Mails des Éducateurs</h1>
+    <a href="{{ path('app_send_mail_educateur') }}" class="btn btn-primary mb-3">Écrire un Mail</a>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Objet</th>
+                    <th>Message</th>
+                    <th>Destinataires</th>
+                    <th>Date d'envoi</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for mail in mails %}
                 <tr>
                     <td>{{ mail.objet }}</td>
                     <td>{{ mail.message }}</td>
                     <td>
                         {% for educateur in mail.educateurs %}
-                            {{ educateur.emailEducateur }}{% if not loop.last %}, {% endif %}
+                        {{ educateur.emailEducateur }}{% if not loop.last %}, {% endif %}
                         {% else %}
-                            Aucun destinataire
+                        Aucun destinataire
                         {% endfor %}
                     </td>
                     <td>{{ mail.dateEnvoie|date('Y-m-d H:i') }}</td>
                     <td>
-                        <a href="{{ path('app_delete_mail_educateur', {'id': mail.id}) }}" class="btn btn-danger">Supprimer</a>
+                        <a href="{{ path('app_delete_mail_educateur', {'id': mail.id}) }}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce mail?');">Supprimer</a>
                     </td>
                 </tr>
-            {% else %}
+                {% else %}
                 <tr>
-                    <td colspan="5">Aucun mail trouvé.</td>
+                    <td colspan="5" class="text-center">Aucun mail trouvé.</td>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </section>
 {% endblock %}

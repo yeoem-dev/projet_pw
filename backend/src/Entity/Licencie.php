@@ -24,8 +24,8 @@ class Licencie
     #[ORM\Column(length: 50)]
     private ?string $prenom_licencie = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: 'licencies')]
+    #[ORM\JoinColumn(name: 'categorie_id', referencedColumnName: 'id', nullable: false)]
     private ?Categorie $Categorie = null;
 
     #[ORM\OneToMany(mappedBy: 'Licencie', targetEntity: Contact::class, orphanRemoval: true)]

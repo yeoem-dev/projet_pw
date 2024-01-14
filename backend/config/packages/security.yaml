@@ -20,7 +20,7 @@ security:
                 login_path: app_login
                 check_path: app_login
             logout:
-                path: app_loout
+                path: app_logout
                 target: app_login
             custom_authenticator: App\Security\EducatorAuthenticator
             entry_point: 'App\Security\EducatorAuthenticator'
@@ -34,7 +34,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/categorie, roles: ROLE_USER }
+        #- { path: ^/categorie, roles: ROLE_USER }
+        #- { path: ^/mail, roles: ROLE_USER }
 
 when@test:
     security:

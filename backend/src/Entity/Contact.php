@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ContactRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
@@ -28,6 +30,18 @@ class Contact
     #[ORM\ManyToOne(inversedBy: 'contacts')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Licencie $Licencie = null;
+
+    #[ORM\ManyToMany(targetEntity: MailContact::class, mappedBy: 'contacts')]
+    private Collection $mailContacts;
+
+    #[ORM\OneToMany(mappedBy: 'expediteur', targetEntity: MailContact::class, orphanRemoval: true)]
+    private Collection $mailContactEnvoye;
+
+    public function __construct()
+    {
+        $this->mailContacts = new ArrayCollection();
+        $this->mailContactEnvoye = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +104,63 @@ class Contact
     public function setLicencie(?Licencie $Licencie): static
     {
         $this->Licencie = $Licencie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MailContact>
+     */
+    public function getMailContacts(): Collection
+    {
+        return $this->mailContacts;
+    }
+
+    public function addMailContact(MailContact $mailContact): static
+    {
+        if (!$this->mailContacts->contains($mailContact)) {
+            $this->mailContacts->add($mailContact);
+            $mailContact->addContact($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMailContact(MailContact $mailContact): static
+    {
+        if ($this->mailContacts->removeElement($mailContact)) {
+            $mailContact->removeContact($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MailContact>
+     */
+    public function getMailContactEnvoye(): Collection
+    {
+        return $this->mailContactEnvoye;
+    }
+
+    public function addMailContactEnvoye(MailContact $mailContactEnvoye): static
+    {
+        if (!$this->mailContactEnvoye->contains($mailContactEnvoye)) {
+            $this->mailContactEnvoye->add($mailContactEnvoye);
+            $mailContactEnvoye->setExpediteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMailContactEnvoye(MailContact $mailContactEnvoye): static
+    {
+        if ($this->mailContactEnvoye->removeElement($mailContactEnvoye)) {
+            // set the owning side to null (unless already changed)
+            if ($mailContactEnvoye->getExpediteur() === $this) {
+                $mailContactEnvoye->setExpediteur(null);
+            }
+        }
 
         return $this;
     }

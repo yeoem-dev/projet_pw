@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repository;
-
+use App\Entity\Categorie;
 use App\Entity\Contact;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,6 +19,17 @@ class ContactRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Contact::class);
+    }
+
+    public function getContactByCategorie(int $categorieId)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.Licencie', 'l')
+            ->leftJoin('l.Categorie', 'cat')
+            ->where('cat.id = :id')
+            ->setParameter('id', $categorieId)
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**

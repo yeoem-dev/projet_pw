@@ -22,7 +22,7 @@ class Categorie
     private ?string $code_categorie = null;
 
     #[ORM\OneToMany(mappedBy: 'Categorie', targetEntity: Licencie::class)]
-    private $licencies;
+    private Collection $licencies;
 
     public function __construct()
     {

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mails des Éducateurs{% endblock %}
+
+{% block body %}
+<section class="mails-educateur">
+    <h1>Mails des Éducateurs</h1>
+    <a href="{{ path('app_send_mail_educateur') }}" class="btn btn-primary">Écrire un Mail</a>
+    <table class="mail-table">
+        <thead>
+            <tr>
+                <th>Objet</th>
+                <th>Message</th>
+                <th>Destinataires</th>
+                <th>Date d'envoi</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mail in mails %}
+                <tr>
+                    <td>{{ mail.objet }}</td>
+                    <td>{{ mail.message }}</td>
+                    <td>
+                        {% for educateur in mail.educateurs %}
+                            {{ educateur.emailEducateur }}{% if not loop.last %}, {% endif %}
+                        {% else %}
+                            Aucun destinataire
+                        {% endfor %}
+                    </td>
+                    <td>{{ mail.dateEnvoie|date('Y-m-d H:i') }}</td>
+                    <td>
+                        <a href="{{ path('app_delete_mail_educateur', {'id': mail.id}) }}" class="btn btn-danger">Supprimer</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucun mail trouvé.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

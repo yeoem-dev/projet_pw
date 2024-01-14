@@ -1,3 +1,38 @@
+/* Navbar styles */
+.navbar {
+    background-color: #007BFF;
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: #fff;
+}
+
+.navbar-toggler-icon {
+    background-color: #fff;
+}
+
+/* Dropdown menu styles */
+.dropdown-menu {
+    background-color: #007BFF;
+}
+
+.dropdown-menu a {
+    color: #fff !important;
+}
+
+/* Dropdown item styles */
+.dropdown-item {
+    color: #fff !important;
+    background-color: transparent !important;
+}
+
+/* Logout button style */
+.navbar-nav.ml-auto .nav-link {
+    color: #fff;
+}
+
+/* Card styles */
 .card {
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -14,6 +49,7 @@
     color: #666;
 }
 
+/* Primary button style */
 .btn-primary {
     background-color: #007bff;
     color: white;
@@ -21,4 +57,72 @@
     text-decoration: none;
     border-radius: 5px;
     display: inline-block;
+}
+
+/* Danger button style */
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* Table styles */
+.mail-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.mail-table th, .mail-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.mail-table th {
+    background-color: #f4f4f4;
+}
+
+/* Form styles */
+.mail-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+}
+
+.mail-form h1 {
+    text-align: center;
+}
+
+/* Form input styles */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+}
+
+/* Form button styles */
+.btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #007bff;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
 }

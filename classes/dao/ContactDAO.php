@@ -28,7 +28,7 @@ class ContactDAO {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($row) {
-                return new ContactModel($row['id'], $row['nom_contact'], $row['prenom_contact'], $row['email_contact'], $row['num_tel_ontact'], $row['licencie_id']);
+                return new ContactModel($row['id'], $row['nom_contact'], $row['prenom_contact'], $row['email_contact'], $row['num_tel_contact'], $row['licencie_id']);
             } else {
                 return null; // Aucun contact trouvé avec cet ID
             }
